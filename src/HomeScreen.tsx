@@ -11,117 +11,32 @@ import {
   Linking,
   StyleSheet,
   Platform,
+  Text,
 } from 'react-native';
-import {useLinkTo} from '@react-navigation/native';
-import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
-import DebugTag from './DebugTag';
+import  Icon  from 'react-native-vector-icons/FontAwesome';
+import MyTabs from './Sii';
+// import { Header } from 'react-native/Libraries/NewAppScreen';
 
-const HomeScreen: React.FC = () => {
-  const linkTo = useLinkTo();
-
-  const openIEC = () => {
-    Linking.openURL('com.deeplinking://IECActivityFormData');
-  };
-
-  const openCHM = () => {
-    Linking.openURL('com.deeplinking://CHMFormData');
-  };
-
-  const openSurvey = () => {
-    Linking.openURL('com.deeplinking://SurveyFormData');
-  };
-
-  const openInsta = () => {
-    Linking.openURL('instagram://user?username=instagram').catch(() => {
-      Linking.openURL('https://www.instagram.com/instagram');
-    });
-  };
-
-  const openPhotos = () => {
-    if (Platform.OS == 'ios') {
-      Linking.openURL('photos-redirect://');
-    } else if (Platform.OS == 'android') {
-      Linking.openURL('content://media/internal/images/media');
-    } else {
-      console.log('Could not open Photos');
-    }
-  };
-
-  const backgroundStyle = {
-    backgroundColor: Colors.lighter,
-  };
-
+function Art(){ 
   return (
-    <View>
-      <SafeAreaView style={backgroundStyle}>
-        <StatusBar
-          barStyle={'dark-content'}
-          backgroundColor={backgroundStyle.backgroundColor}
-        />
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={backgroundStyle}>
-          <Header />
-          <View style={{margin: 8}}>
-            <Button title="IEC" onPress={openIEC} />
-          </View>
-          <View style={{margin: 8}}>
-            <Button title="CHM" onPress={openCHM} />
-          </View>
-          <View style={{margin: 8}}>
-            <Button title="Survey" onPress={openSurvey} />
-          </View>
-          <View style={{margin: 8}}>
-            <Button
-              title="call"
-              onPress={() => Linking.openURL(`tel:9542533030`)}
-            />
-          </View>
-          <View style={{margin: 8}}>
-            <Button title="Settings" onPress={() => Linking.openSettings()} />
-          </View>
-          <View style={{margin: 8}}>
-            <Button
-              title="Whats App"
-              onPress={() =>
-                Linking.openURL(`whatsapp://send?phone=$9542533030&text=$hello`)
-              }
-            />
-          </View>
-
-          <View style={{margin: 8}}>
-            <Button
-              title="Map"
-              onPress={() =>
-                Linking.openURL(
-                  `https://www.google.com/maps/search/?api=1&query=india`,
-                )
-              }
-            />
-          </View>
-          <View style={{margin: 8}}>
-            <Button title="Gallery" onPress={openPhotos} />
-          </View>
-          <View style={{margin: 8}}>
-            <Button
-              title="Youtube"
-              onPress={() => Linking.openURL(`https://www.youtube.com`)}
-            />
-          </View>
-          <View style={{margin: 8}}>
-            <Button title="Insta" onPress={openInsta} />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </View>
+    <><View style={styles.container}>
+     
+      <View>
+      </View>
+      < MyTabs/>
+    </View></>
   );
 };
 
-export default HomeScreen;
+
+
+
+
+export default Art;  
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+   flex:1,
   },
   debugContainer: {
     position: 'absolute',
@@ -130,16 +45,23 @@ const styles = StyleSheet.create({
     zIndex: 9999,
   },
   debugTag: {
-    backgroundColor: 'red',
+    backgroundColor: 'White',
     padding: 1,
     transform: [{rotate: '45deg'}],
   },
   debugText: {
-    color: 'white',
-    fontSize: 12,
+    color: 'Black',
+    fontSize: 20,
+    textAlign:'left',
+    fontWeight: 'bold',
+    marginTop:25,
+    marginLeft:40,
   },
   backgroundStyle: {
     flex: 1,
     backgroundColor: 'white',
   },
 });
+
+
+
