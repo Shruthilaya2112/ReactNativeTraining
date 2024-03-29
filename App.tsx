@@ -18,6 +18,7 @@ const Stack = createNativeStackNavigator();
 import MyTabs from './src/Sii';
 import ChatOne from './src/ChatOne';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Status from './src/Status';
  
 const App: React.ComponentType<any> | React.JSX.IntrinsicAttributes=({route}:any) =>{
   return (
@@ -56,6 +57,21 @@ const App: React.ComponentType<any> | React.JSX.IntrinsicAttributes=({route}:any
     }
     
   }   component={ChatOne} />
+
+
+  <Stack.Screen name="Status"  options={
+    {
+      headerStyle: { backgroundColor: 'green' },
+      headerTintColor: 'white',
+      headerTitle: () => <Text style={{fontSize: 25, color: 'white'}}>WhatsApp</Text>,
+      headerRight: () => (
+        <View style={{ flexDirection: 'row' }}>
+                  <MaterialCommunityIcons name="dots-vertical" size={30} color="white" style={{ marginLeft: 5 }}/>
+                </View>
+      ),
+    }
+    
+  }   component={Status} />
 
 
           </Stack.Navigator>

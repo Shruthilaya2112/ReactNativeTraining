@@ -1,8 +1,9 @@
 import React from 'react'
-import { Image, ScrollView, StyleSheet, Text, View ,FlatList} from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, View ,FlatList, TouchableOpacity} from 'react-native'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import Status from './Status';
 
-const Updates = () => {
+const Updates = ({navigation}:any) => {
  const Status=[
   {
     id:'1',
@@ -37,6 +38,20 @@ const Updates = () => {
 
  ];
 
+ 
+  const press=( update :{
+    id: string;
+    name: string;
+    image?: Image;
+    time: string;
+  })=>
+    {
+      console.log(update);
+      navigation.navigate('Status');
+    };
+
+ 
+
 
   return (
     
@@ -70,7 +85,7 @@ const Updates = () => {
     keyExtractor={item => item.id}
     renderItem={({item})=>
   (
-    
+    <TouchableOpacity onPress={()=>press(item)} >
       <View style={{backgroundColor: '#FFFFFF',  flexDirection: 'row', padding:18}}>
 
       <View style={styles.circleContainer}>
@@ -83,18 +98,18 @@ const Updates = () => {
     </View>
         
         <View style={{ marginLeft: 15}} >
-          <Text style={styles.read}>{item.name}</Text>
+          <Text   style={styles.read}>{item.name}</Text>
           <Text>{item.time}</Text>
         </View>
         </View>
+        </TouchableOpacity>
+      
   )}
   
       
 
 
->
-  
-</FlatList>
+/>
 </View>
 
 )
