@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   ScrollView,
@@ -11,6 +11,7 @@ import {
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Status from './Status';
 import { T } from '@angular/cdk/keycodes';
+import { ImageLibraryOptions, launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 const Updates = ({navigation}: any) => {
   const Status = [
@@ -59,14 +60,58 @@ const Updates = ({navigation}: any) => {
     console.log('====================================');
   };
 
+    const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
+  const Call=()=>{
+    // const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
+ 
+    const options: ImageLibraryOptions = {
+      mediaType: 'photo', // Specify the media type (photo or video)
+      includeBase64: true, // Set to true if you want to include base64 data
+    };
+ 
+   
+      try {
+              launchCamera(options, (response: any) => {
+                console.log(`response : ${JSON.stringify(response)}`);
+         
+                if (
+                  response?.assets &&
+                   response.assets.length > 0 &&
+                  response.assets[0].uri
+                ) {
+                  console.log(`Image URI: ${response.assets[0].uri}`);
+                  setSelectedPhoto(response.assets[0].base64);
+
+             
+                }
+                else
+                if (response.didCancel) {
+                  console.log('User cancelled image picker');
+                } else if (response.errorMessage) {
+                  console.log('ImagePicker Error: ', response.errorMessage);
+                }
+              });
+            }
+       catch (error) {
+        console.error('error :', error);
+       
+      }
+
+  };
+
   return (
     <View style={{backgroundColor: '#FFFFFF'}}>
+          <TouchableOpacity  onPress={Call}>
       <View
         style={{backgroundColor: '#FFFFFF', flexDirection: 'row', padding: 18}}>
+        
+          
         <View>
-          <TouchableOpacity onPress={}
-          <Image source={require('./images/id1.jpeg')} style={styles.picture} />
-
+         
+        <Image
+  source={selectedPhoto ? {uri: `data:image/png;base64,${selectedPhoto}`} : require('./images/id1.jpeg')}
+  style={styles.picture}
+/>
           <FontAwesome
             name="plus-circle"
             size={25}
@@ -79,11 +124,16 @@ const Updates = ({navigation}: any) => {
               borderRadius: 50,
             }}></FontAwesome>
         </View>
-        <View style={{marginLeft: 15}}>
-          <Text style={styles.read}>My Status</Text>
+        <View  style={{marginLeft: 15}}>
+       
+          <Text  style={styles.read}>My Status</Text>
           <Text>Tap to add status update</Text>
+       
         </View>
+        
       </View>
+      </TouchableOpacity>
+     
 
       <View>
         <Text style={{margin: 10, justifyContent: 'space-around'}}>

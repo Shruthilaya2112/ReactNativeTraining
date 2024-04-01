@@ -19,7 +19,7 @@ import MyTabs from './src/Sii';
 import ChatOne from './src/ChatOne';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Status from './src/Status';
-import Picture from './src/Picture';
+
 
 const App: React.ComponentType<any> | React.JSX.IntrinsicAttributes = ({
   route,
@@ -99,7 +99,7 @@ const App: React.ComponentType<any> | React.JSX.IntrinsicAttributes = ({
             component={ChatOne}
           />
 
-          {/* <Stack.Screen name="Home" component={Status} /> */}
+          {/* <Stack.Screen name="Hom" component={handleChoosePhoto} /> */}
 
           <Stack.Screen
             name="StatusPage"
@@ -124,7 +124,7 @@ const App: React.ComponentType<any> | React.JSX.IntrinsicAttributes = ({
           />
         </Stack.Navigator>
 
-        <Stack.Screen name='Picture' component={Picture}/>
+      
       </NavigationContainer>
     </View>
   );
